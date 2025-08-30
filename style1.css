@@ -1,65 +1,24 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Arial, sans-serif;
-}
-
-body {
-  background: #181a1b;
-  color: #f0f0f0;
-  overflow: hidden; /* ❌ sem scroll */
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Header */
-header {
-  background: #202225;
-  color: white;
-  padding: 15px 25px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-
-header h1 {
-  font-size: 1.5rem;
-}
-
-header .back-btn {
-  background: #2c2f33;
-  color: #f0f0f0;
-  text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: 0.2s;
-}
-
-header .back-btn:hover {
-  background: #3a3d41;
-}
-
 /* Layout principal */
 .layout {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr; /* 3 colunas */
+  grid-template-columns: 1fr 2fr 1fr; /* esquerda | centro | direita */
   gap: 20px;
   padding: 20px;
-  height: calc(100vh - 70px); /* altura menos o header */
+  height: calc(100vh - 70px); /* ocupa toda a tela, menos o header */
+}
+
+/* Força as colunas a ficarem alinhadas verticalmente */
+.sidebar, 
+.video-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 /* Colunas laterais */
 .sidebar {
-  display: flex;
-  flex-direction: column;
   gap: 15px;
-  overflow: hidden;
 }
 
 .sidebar h3 {
@@ -74,41 +33,13 @@ header .back-btn:hover {
   gap: 10px;
 }
 
-.video-thumb {
-  background: #2c2f33;
-  border-radius: 10px;
-  overflow: hidden;
-  text-decoration: none;
-  color: #f0f0f0;
-  transition: transform 0.2s, background 0.2s;
-}
-
-.video-thumb:hover {
-  transform: translateY(-5px);
-  background: #3a3d41;
-}
-
-.video-thumb img {
-  width: 100%;
-  display: block;
-}
-
-.video-thumb p {
-  padding: 8px;
-  text-align: center;
-  font-size: 0.85rem;
-}
-
-/* Vídeo central */
+/* Vídeo central ocupa bem o meio */
 .video-card {
   background: #202225;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .video-card h2 {
@@ -131,7 +62,3 @@ header .back-btn:hover {
   border: none;
 }
 
-.author {
-  font-size: 0.9rem;
-  color: #bbb;
-}
