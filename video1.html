@@ -3,7 +3,127 @@
 <head>
   <meta charset="UTF-8">
   <title>Machine Love (feat. Kasane Teto)</title>
-  <link rel="stylesheet" href="style1.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #181a1b;
+      color: #f0f0f0;
+      overflow: hidden; /* sem scroll */
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      background: #202225;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+    }
+
+    header .back-btn {
+      background: #2c2f33;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #f0f0f0;
+    }
+
+    /* Layout 3 colunas */
+    .layout {
+      flex: 1;
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      height: calc(100vh - 70px); /* altura do body menos header */
+      align-items: flex-start; /* garante que todos fiquem no topo */
+      justify-content: center;
+    }
+
+    /* Colunas laterais */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 180px; /* largura fixa para cada coluna */
+      flex-shrink: 0;
+      align-self: flex-start; /* garante que a coluna grude no topo */
+    }
+
+    .sidebar h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* Vídeo central */
+    .video-card {
+      flex: 1;
+      max-width: 800px;
+      background: #202225;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .video-card h2 {
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Miniaturas */
+    .video-thumb {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: #f0f0f0;
+      background: #2c2f33;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .video-thumb:hover {
+      transform: translateY(-5px);
+      background: #3a3d41;
+    }
+
+    .video-thumb img {
+      width: 100%;
+    }
+
+    .video-thumb p {
+      padding: 8px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -35,7 +155,7 @@
     <section class="video-card">
       <h2>Machine Love (feat. Kasane Teto)</h2>
       <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
       </div>
       <p class="author">Jamie Paige / JamieP 🎶</p>
     </section>
