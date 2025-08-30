@@ -3,135 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Machine Love (feat. Kasane Teto)</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #181a1b;
-      color: #f0f0f0;
-      overflow: hidden; /* sem scroll */
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Header */
-    header {
-      background: #202225;
-      padding: 15px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header h1 {
-      font-size: 1.5rem;
-    }
-
-    header .back-btn {
-      background: #2c2f33;
-      padding: 8px 14px;
-      border-radius: 8px;
-      text-decoration: none;
-      color: #f0f0f0;
-    }
-
-    /* Layout 3 colunas */
-    .layout {
-      flex: 1;
-      display: flex;
-      gap: 30px; /* mais espaço entre colunas */
-      padding: 20px;
-      height: calc(100vh - 70px); /* altura do body menos header */
-      align-items: stretch; /* faz todas as colunas terem mesma altura */
-      justify-content: center;
-    }
-
-    /* Colunas laterais */
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      width: 250px; /* mais largas */
-      flex-shrink: 0;
-    }
-
-    .sidebar h3 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .video-list {
-      flex: 1; /* ocupa toda a altura */
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between; /* distribui vídeos igualmente */
-    }
-
-    /* Vídeo central */
-    .video-card {
-      flex: 1;
-      max-width: 800px;
-      background: #202225;
-      padding: 25px;
-      border-radius: 15px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .video-card h2 {
-      margin-bottom: 15px;
-      font-size: 1.2rem;
-    }
-
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* Miniaturas */
-    .video-thumb {
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: #f0f0f0;
-      background: #2c2f33;
-      border-radius: 10px;
-      overflow: hidden;
-      transition: transform 0.2s;
-      flex: 1; /* cada vídeo cresce proporcionalmente */
-    }
-
-    .video-thumb:hover {
-      transform: translateY(-5px);
-      background: #3a3d41;
-    }
-
-    .video-thumb img {
-      width: 100%;
-      height: 70%; /* imagem ocupa grande parte da box */
-      object-fit: cover;
-    }
-
-    .video-thumb p {
-      padding: 8px;
-      text-align: center;
-      font-size: 1rem;
-    }
-  </style>
+  <link rel="stylesheet" href="style1.css">
 </head>
 <body>
   <header>
@@ -139,53 +11,35 @@
     <a href="index.html" class="back-btn">⬅ Voltar</a>
   </header>
 
-  <main class="layout">
-    <!-- Lado esquerdo -->
-    <aside class="sidebar left">
-      <h3>Do mesmo criador</h3>
-      <div class="video-list">
-        <a href="#" class="video-thumb">
+  <main>
+    <div class="video-card">
+      <h2>Machine Love (feat. Kasane Teto)</h2>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                frameborder="0" allowfullscreen></iframe>
+      </div>
+      <p class="author">Jamie Paige / JamieP 🎶</p>
+    </div>
+
+    <!-- Recomendações -->
+    <section class="recommendations">
+      <h3>Recomendados</h3>
+      <div class="video-grid">
+        <a href="video1.html" class="video-thumb">
+          <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" alt="Vídeo 1">
+          <p>Machine Love</p>
+        </a>
+        <a href="video2.html" class="video-thumb">
           <img src="https://img.youtube.com/vi/9bZkp7q19f0/0.jpg" alt="Vídeo 2">
           <p>Gangnam Style</p>
         </a>
-        <a href="#" class="video-thumb">
+        <a href="video3.html" class="video-thumb">
           <img src="https://img.youtube.com/vi/3JZ_D3ELwOQ/0.jpg" alt="Vídeo 3">
           <p>See You Again</p>
         </a>
-        <a href="#" class="video-thumb">
-          <img src="https://img.youtube.com/vi/l482T0yNkeo/0.jpg" alt="Vídeo 4">
-          <p>Bohemian Rhapsody</p>
-        </a>
       </div>
-    </aside>
-
-    <!-- Vídeo central -->
-    <section class="video-card">
-      <h2>Machine Love (feat. Kasane Teto)</h2>
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-      </div>
-      <p class="author">Jamie Paige / JamieP 🎶</p>
     </section>
-
-    <!-- Lado direito -->
-    <aside class="sidebar right">
-      <h3>Recomendações</h3>
-      <div class="video-list">
-        <a href="#" class="video-thumb">
-          <img src="https://img.youtube.com/vi/kJQP7kiw5Fk/0.jpg" alt="Vídeo 5">
-          <p>Despacito</p>
-        </a>
-        <a href="#" class="video-thumb">
-          <img src="https://img.youtube.com/vi/CevxZvSJLk8/0.jpg" alt="Vídeo 6">
-          <p>Chandelier</p>
-        </a>
-        <a href="#" class="video-thumb">
-          <img src="https://img.youtube.com/vi/hT_nvWreIhg/0.jpg" alt="Vídeo 7">
-          <p>Counting Stars</p>
-        </a>
-      </div>
-    </aside>
   </main>
 </body>
 </html>
+
