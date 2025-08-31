@@ -299,6 +299,23 @@
       </div>
     </div>
 
+    <!-- Playlist -->
+<div class="sidebar" id="playlist">
+  <h3>📌 Playlist</h3>
+  <div class="playlist-item" data-videoid="sqK-jh4TDXo" data-title="Machine Love (feat. Kasane Teto)" data-author="Jamie Paige / JamieP">
+    <img src="https://i.ytimg.com/vi/sqK-jh4TDXo/hqdefault.jpg" alt="">
+    <p>Machine Love (feat. Kasane Teto)</p>
+  </div>
+  <div class="playlist-item" data-videoid="19y8YTbvri8" data-title="メズマライザー / 初音ミク・重音テト SV" data-author="DECO*27">
+    <img src="https://i.ytimg.com/vi/19y8YTbvri8/hqdefault.jpg" alt="">
+    <p>メズマライザー / 初音ミク・重音テト SV</p>
+  </div>
+  <div class="playlist-item" data-videoid="kbNdx0yqbZE" data-title="モニタリング feat. 初音ミク" data-author="DECO*27">
+    <img src="https://i.ytimg.com/vi/kbNdx0yqbZE/hqdefault.jpg" alt="">
+    <p>モニタリング feat. 初音ミク</p>
+  </div>
+</div>
+
     <!-- Sugestões -->
     <div class="sidebar">
   <div class="suggestion">
@@ -431,8 +448,38 @@ document.addEventListener("click", (e)=>{
 });
   </script>
 
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  let player;
+
+  // Inicializa o player
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player("player", {
+      height: "600",
+      width: "100%",
+      videoId: "sqK-jh4TDXo", // vídeo inicial
+      playerVars: { 'autoplay': 0, 'rel': 0, 'modestbranding': 1 }
+    });
+  }
+
+  // Evento de clique na playlist
+  document.querySelectorAll(".playlist-item").forEach(item => {
+    item.addEventListener("click", () => {
+      const videoId = item.dataset.videoid;
+      const title   = item.dataset.title;
+      const author  = item.dataset.author;
+
+      player.loadVideoById(videoId);
+      document.getElementById("videoTitle").textContent = title;
+      document.getElementById("videoAuthor").textContent = author;
+    });
+  });
+</script>
+
+  
 </body>
 </html>
+
 
 
 
