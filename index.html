@@ -222,10 +222,14 @@
   const stayLogged = document.getElementById('stayLogged');
   const profilePicInput = document.getElementById('profilePicInput');
 
-  // abrir login ao clicar no perfil
-  profile.addEventListener('click', () => {
-    overlay.style.display = 'flex';
-  });
+// abrir login ao clicar no perfil, só se não estiver logado
+profile.addEventListener('click', () => {
+  const loggedUser = localStorage.getItem('username') || sessionStorage.getItem('username');
+  if(!loggedUser){ 
+    overlay.style.display = 'flex'; 
+  }
+});
+
 
   // fechar login
   closeBtn.addEventListener('click', () => {
@@ -315,6 +319,7 @@
 
 </body>
 </html>
+
 
 
 
