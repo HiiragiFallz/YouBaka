@@ -353,7 +353,7 @@ searchInput.addEventListener("input", function() {
 
   const filtered = videos.filter(video =>
     video.title.toLowerCase().includes(query) ||
-    video.keywords.toLowerCase().includes(query)
+    video.keywords.includes(query) // 🔹 aqui tava quebrando
   );
 
   if (filtered.length === 0) {
