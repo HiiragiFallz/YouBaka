@@ -27,9 +27,16 @@
       gap: 10px;
     }
 
-    .logo-img {
-      height: 40px;  /* 🔥 Ajuste aqui o tamanho da logo */
-      width: auto;
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: #b35454;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      font-weight: bold;
     }
 
     .search-bar {
@@ -102,14 +109,14 @@
       font-size: 0.95rem;
       line-height: 1.4;
       color: #ccc;
-      max-height: 3.5em;
+      max-height: 3.5em; /* mostra só parte do texto */
       overflow: hidden;
       transition: max-height 0.3s ease;
-      white-space: pre-line;
+      white-space: pre-line; /* 🔥 respeita ENTERs do texto */
     }
 
     .video-description.expanded {
-      max-height: none;
+      max-height: none; /* expande tudo */
     }
 
     #toggleBtn {
@@ -121,6 +128,7 @@
       font-size: 0.95rem;
     }
 
+    /* Sugestões */
     .sidebar {
       flex: 1;
       display: flex;
@@ -151,7 +159,7 @@
     .suggestion p {
       margin-top: 5px;
       font-size: 14px;
-      color: #ff457f; /* 🔥 nome rosa */
+      color: #ff457f; /* título rosa */
     }
   </style>
 </head>
@@ -160,7 +168,7 @@
   <!-- Cabeçalho -->
   <header>
     <div class="logo">
-      <img src="img/logo.png.png" alt="YouBaka" class="logo-img">
+      <div class="logo-icon">Logo</div>
       <h1>YouBaka</h1>
     </div>
 
@@ -186,7 +194,8 @@
         <h2>Machine Love (feat. Kasane Teto)</h2>
         <p>Jamie Paige / JamieP</p>
         <p class="video-description" id="desc">
-Aqui vai a descrição...
+lyrics:
+... (sua letra completa aqui)
         </p>
         <button id="toggleBtn">Mostrar mais</button>
       </div>
