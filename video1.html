@@ -12,7 +12,97 @@
       color: white;
     }
 
-    /* ... resto do seu CSS igual ... */
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #1c1c1c;
+      padding: 10px 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: #b35454;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      flex: 1;
+      margin: 0 20px;
+      display: flex;
+      align-items: center;
+      background: #777;
+      border-radius: 20px;
+      padding: 5px 10px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: white;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .search-bar button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+    }
+
+    .back-btn {
+      background: #777;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 16px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Layout */
+    main {
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .video-section {
+      flex: 3;
+      background: #1a1a1a;
+      border-radius: 20px;
+      padding: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 550px;
+      border-radius: 12px;
+    }
+
+    .video-info {
+      margin-top: 10px;
+    }
+
+    .video-info h2 {
+      margin: 5px 0;
+    }
 
     /* Estilo do mostrar mais/menos */
     .video-description {
@@ -22,7 +112,7 @@
       max-height: 3.5em; /* mostra só parte do texto */
       overflow: hidden;
       transition: max-height 0.3s ease;
-      white-space: pre-line; /* 🔥 Respeita ENTERs no texto */
+      white-space: pre-line; /* 🔥 Respeita ENTERs do texto */
     }
 
     .video-description.expanded {
@@ -37,10 +127,59 @@
       cursor: pointer;
       font-size: 0.95rem;
     }
+
+    .sidebar {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .suggestion {
+      background: #1a1a1a;
+      border-radius: 20px;
+      padding: 10px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .suggestion:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .suggestion img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .suggestion p {
+      margin-top: 5px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Cabeçalho -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">Logo</div>
+      <h1>YouBaka</h1>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Pesquisar...">
+      <button>🔍</button>
+    </div>
+
+    <button class="back-btn" onclick="history.back()">Voltar</button>
+  </header>
+
+  <!-- Conteúdo principal -->
   <main>
+    <!-- Vídeo -->
     <div class="video-section">
       <iframe 
         src="https://www.youtube.com/embed/sqK-jh4TDXo?autoplay=0&rel=0&modestbranding=1"
@@ -135,16 +274,8 @@ i will always be in love!
         <button id="toggleBtn">Mostrar mais</button>
       </div>
     </div>
-  </main>
 
-  <script>
-    const desc = document.getElementById("desc");
-    const btn = document.getElementById("toggleBtn");
-
-    btn.addEventListener("click", () => {
-      desc.classList.toggle("expanded");
-      btn.textContent = desc.classList.contains("expanded") ? "Mostrar menos" : "Mostrar mais";
-    });
-  </script>
-</body>
-</html>
+    <!-- Sugestões -->
+    <div class="sidebar">
+      <div class="suggestion">
+        <img src="https://i.ytimg.com/vi/0iVlSN
