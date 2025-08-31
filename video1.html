@@ -2,25 +2,169 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Machine Love (feat. Kasane Teto)</title>
-  <link rel="stylesheet" href="style1.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouBaka - Vídeo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #2e2e2e;
+      color: white;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #1a1a1a;
+      padding: 10px 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: #a44;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      flex: 1;
+      margin: 0 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      background: #555;
+      color: white;
+    }
+
+    .back-btn {
+      background: #666;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    /* LAYOUT PRINCIPAL */
+    .container {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .video-section {
+      background: #111;
+      padding: 15px;
+      border-radius: 20px;
+    }
+
+    .video-section iframe {
+      width: 100%;
+      height: 400px;
+      border-radius: 12px;
+    }
+
+    .video-info {
+      margin-top: 10px;
+    }
+
+    .video-info h2 {
+      margin: 5px 0;
+    }
+
+    .video-info p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    /* SIDEBAR DE RECOMENDADOS */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .recommendation {
+      background: #111;
+      padding: 10px;
+      border-radius: 15px;
+    }
+
+    .recommendation img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .recommendation p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>YouBaka</h1>
-    <a href="index.html" class="back-btn">⬅ Voltar</a>
-  </header>
 
-  <main>
-    <div class="video-card">
-      <h2>Machine Love (feat. Kasane Teto)</h2>
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/sqK-jh4TDXo?autoplay=1&rel=0&modestbranding=1" 
-                frameborder="0" allowfullscreen></iframe>
-      </div>
-      <p class="author">Jamie Paige / JamieP 🎶</p>
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="logo">
+      <div class="logo-icon">YB</div>
+      <h2>YouBaka</h2>
     </div>
-  </main>
+    <div class="search-bar">
+      <input type="text" placeholder="Pesquisar...">
+    </div>
+    <button class="back-btn">Voltar</button>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="container">
+    <!-- VÍDEO PRINCIPAL -->
+    <div class="video-section">
+      <iframe 
+        src="https://www.youtube.com/embed/VIDEO_ID?autoplay=0&rel=0&modestbranding=1"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+      <div class="video-info">
+        <h2>Nome do Vídeo</h2>
+        <p>Nome do Criador</p>
+      </div>
+    </div>
+
+    <!-- RECOMENDADOS -->
+    <div class="sidebar">
+      <div class="recommendation">
+        <img src="https://via.placeholder.com/300x180.png?text=Capa+1" alt="Capa vídeo 1">
+        <p>Nome do vídeo 1</p>
+      </div>
+      <div class="recommendation">
+        <img src="https://via.placeholder.com/300x180.png?text=Capa+2" alt="Capa vídeo 2">
+        <p>Nome do vídeo 2</p>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
 
