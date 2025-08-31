@@ -221,16 +221,18 @@
 
 .search-results {
   position: absolute;
-  top: 40px;
+  top: 52px;             /* ajusta a distância da barra */
   left: 0;
-  background: #222;
+  right: 0;              /* deixa expandir até a largura total do container pai */
+  background: #1e1e1e;
   border: 1px solid #ff457f;
-  border-radius: 10px;
-  width: 100%;
-  max-height: 250px;
+  border-radius: 12px;
+  max-height: 300px;
   overflow-y: auto;
   display: none;
-  z-index: 10;
+  z-index: 1000;
+  width: 100%;           /*  ocupa toda largura disponível */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
 .search-results div {
@@ -425,6 +427,7 @@ document.addEventListener("click", (e)=>{
 
 </body>
 </html>
+
 
 
 
