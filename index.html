@@ -4,19 +4,6 @@
   <meta charset="UTF-8">
   <title>YouBaka</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* só pra exemplo */
-    .search-bar {
-      margin: 15px;
-      text-align: center;
-    }
-    .search-bar input {
-      width: 300px;
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -25,67 +12,85 @@
       <a href="#">Playlists</a>
       <a href="#">Configurações</a>
     </nav>
+
+    <!-- 🔎 Barra de pesquisa -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Pesquisar vídeos...">
+      <button id="searchBtn">Buscar</button>
+    </div>
   </header>
 
-  <!-- 🔍 Barra de pesquisa -->
-  <div class="search-bar">
-    <input type="text" id="search" placeholder="Pesquisar vídeos...">
-  </div>
-
   <main class="grid">
-    <!-- Vídeos -->
-    <a href="video1.html" class="thumb">
+    <!-- 1 -->
+    <a href="video1.html" class="thumb" data-keywords="machine love jamie paige teto">
       <img src="https://i.ytimg.com/vi/sqK-jh4TDXo/hqdefault.jpg" alt="Machine Love">
       <p>Machine Love (feat. Kasane Teto)</p>
     </a>
 
-    <a href="video2.html" class="thumb">
+    <!-- 2 -->
+    <a href="video2.html" class="thumb" data-keywords="mezumaraiza mesmerizer hatsune miku teto japanese">
       <img src="https://i.ytimg.com/vi/19y8YTbvri8/hq720.jpg" alt="メズマライザー">
       <p>メズマライザー / 初音ミク・重音テトSV</p>
     </a>
 
-    <a href="video3.html" class="thumb">
+    <!-- 3 -->
+    <a href="video3.html" class="thumb" data-keywords="monitoring deco27 hatsune miku モニタリング">
       <img src="https://i.ytimg.com/vi/kbNdx0yqbZE/hq720.jpg" alt="Monitoring">
       <p>DECO*27 - モニタリング feat. 初音ミク</p>
     </a>
 
-    <a href="video4.html" class="thumb">
+    <!-- 4 -->
+    <a href="video4.html" class="thumb" data-keywords="birdbrain hev mix teto">
       <img src="https://i.ytimg.com/vi/NA0EfgjfZH8/hq720.jpg" alt="Birdbrain (HEV mix)">
       <p>Birdbrain (HEV mix)</p>
     </a>
 
-    <a href="video5.html" class="thumb">
+    <!-- 5 -->
+    <a href="video5.html" class="thumb" data-keywords="confessions rotten girl sawtowne hatsune miku">
       <img src="https://i.ytimg.com/vi/sV2H712ldOI/hq720.jpg" alt="Confessions of a Rotten Girl">
       <p>SAWTOWNE - Confessions of a Rotten Girl (ft. Hatsune Miku)</p>
     </a>
 
-    <a href="video6.html" class="thumb">
+    <!-- 6 -->
+    <a href="video6.html" class="thumb" data-keywords="birdbrain ok glass teto">
       <img src="https://i.ytimg.com/vi/0iVlSNpq8i8/hq720.jpg" alt="Birdbrain w/ OK Glass">
       <p>BIRDBRAIN (w/ OK Glass) feat. Kasane Teto</p>
     </a>
 
-    <a href="video7.html" class="thumb">
+    <!-- 7 -->
+    <a href="video7.html" class="thumb" data-keywords="retry now hatsune miku いまずぐ輪廻">
       <img src="https://i.ytimg.com/vi/3iUgKH8c7p4/hq720.jpg" alt="いまずぐ輪廻">
       <p>いまずぐ輪廻 / 初音ミク</p>
     </a>
 
-    <a href="video8.html" class="thumb">
+    <!-- 8 -->
+    <a href="video8.html" class="thumb" data-keywords="fire vane jamie paige teto">
       <img src="https://i.ytimg.com/vi/yZkPe7TEuyk/hq720.jpg" alt="FIRE!!!">
       <p>Vane & JamieP - FIRE!!! (feat. Kasane Teto)</p>
     </a>
   </main>
 
+  <!-- 🔥 Script da busca -->
   <script>
-    const searchInput = document.getElementById("search");
-    const thumbs = document.querySelectorAll(".thumb");
+    document.getElementById("searchBtn").addEventListener("click", function() {
+      let input = document.getElementById("searchInput").value.toLowerCase();
+      let videos = document.querySelectorAll(".thumb");
 
-    searchInput.addEventListener("input", function() {
-      const term = this.value.toLowerCase();
+      videos.forEach(video => {
+        let title = video.querySelector("p").textContent.toLowerCase();
+        let keywords = video.getAttribute("data-keywords")?.toLowerCase() || "";
 
-      thumbs.forEach(thumb => {
-        const text = thumb.innerText.toLowerCase();
-        thumb.style.display = text.includes(term) ? "inline-block" : "none";
+        if (title.includes(input) || keywords.includes(input)) {
+          video.style.display = "block";
+        } else {
+          video.style.display = "none";
+        }
       });
+    });
+
+    // 🔄 Opcional: busca em tempo real enquanto digita
+    document.getElementById("searchInput").addEventListener("input", function() {
+      document.getElementById("searchBtn").click();
     });
   </script>
 </body>
