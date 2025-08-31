@@ -278,4 +278,29 @@ i will always be in love!
     <!-- Sugestões -->
     <div class="sidebar">
       <div class="suggestion">
-        <img src="https://i.ytimg.com/vi/0iVlSN
+        <img src="https://i.ytimg.com/vi/0iVlSNpq8i8/maxresdefault.jpg" alt="Capa do vídeo">
+        <p>Outro vídeo</p>
+      </div>
+      <div class="suggestion">
+        <img src="https://i.ytimg.com/vi/3iUgKH8c7p4/hq720.jpg" alt="Capa do vídeo">
+        <p>Mais um vídeo</p>
+      </div>
+      <div class="suggestion">
+        <img src="https://i.ytimg.com/vi/yZkPe7TEuyk/maxresdefault.jpg" alt="Capa do vídeo">
+        <p>Outro recomendado</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const desc = document.getElementById("desc");
+    const btn = document.getElementById("toggleBtn");
+
+    btn.addEventListener("click", () => {
+      desc.classList.toggle("expanded");
+      btn.textContent = desc.classList.contains("expanded") ? "Mostrar menos" : "Mostrar mais";
+    });
+  </script>
+
+</body>
+</html>
