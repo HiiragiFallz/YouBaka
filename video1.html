@@ -315,68 +315,101 @@
       btn.textContent = desc.classList.contains("expanded") ? "Mostrar menos" : "Mostrar mais";
     });
 
-    <script>
-// 🔹 Lista de vídeos do site
+  </script>
+
+  
+<script>
+// =================== BUSCA GLOBAL ===================
 const videos = [
   {
     title: "Machine Love (feat. Kasane Teto)",
-    keywords: "machine love teto kasane",
-    thumbnail: "img/machine.jpg",
+    keywords: "machine love kasane teto jamie paige jamiep utau daemon doll",
+    thumbnail: "https://i.ytimg.com/vi/sqK-jh4TDXo/hqdefault.jpg",
     url: "video1.html"
   },
   {
     title: "メズマライザー / 初音ミク・重音テト SV",
-    keywords: "mezmaraizer miku teto hatsune",
-    thumbnail: "img/mezma.jpg",
+    keywords: "mezumarizer mezmaraizer メズマライザー hatsune miku teto sv",
+    thumbnail: "https://i.ytimg.com/vi/19y8YTbvri8/hq720.jpg",
     url: "video2.html"
   },
   {
     title: "DECO*27 - モニタリング feat. 初音ミク",
-    keywords: "deco monitoring hatsune miku",
-    thumbnail: "img/deco.jpg",
+    keywords: "deco27 deco 27 monitoring モニタリング hatsune miku",
+    thumbnail: "https://i.ytimg.com/vi/kbNdx0yqbZE/hq720.jpg",
     url: "video3.html"
+  },
+  {
+    title: "Birdbrain (HEV mix)",
+    keywords: "birdbrain hev mix jamiep",
+    thumbnail: "https://i.ytimg.com/vi/NA0EfgjfZH8/hq720.jpg",
+    url: "video4.html"
+  },
+  {
+    title: "SAWTOWNE - Confessions of a Rotten Girl (ft. Hatsune Miku)",
+    keywords: "sawtowne confessions of a rotten girl hatsune miku",
+    thumbnail: "https://i.ytimg.com/vi/sV2H712ldOI/hq720.jpg",
+    url: "video5.html"
+  },
+  {
+    title: "BIRDBRAIN (w/ OK Glass) feat. Kasane Teto",
+    keywords: "birdbrain ok glass kasane teto",
+    thumbnail: "https://i.ytimg.com/vi/0iVlSNpq8i8/hq720.jpg",
+    url: "video6.html"
+  },
+  {
+    title: "いまずぐ輪廻 / 初音ミク",
+    keywords: "imazugu rinne いまずぐ輪廻 hatsune miku",
+    thumbnail: "https://i.ytimg.com/vi/3iUgKH8c7p4/hq720.jpg",
+    url: "video7.html"
+  },
+  {
+    title: "Vane & JamieP - FIRE!!! (feat. Kasane Teto)",
+    keywords: "fire !!! vane jamiep kasane teto",
+    thumbnail: "https://i.ytimg.com/vi/yZkPe7TEuyk/hq720.jpg",
+    url: "video8.html"
   }
-  // 👉 aqui você vai adicionando todos os outros vídeos
 ];
 
-const searchInput = document.getElementById("searchInput");
+const searchInput   = document.getElementById("searchInput");
+const searchBtn     = document.getElementById("searchBtn");
 const searchResults = document.getElementById("searchResults");
 
-searchInput.addEventListener("input", function() {
-  const query = this.value.toLowerCase();
+function runSearch(){
+  const query = (searchInput.value || "").toLowerCase().trim();
   searchResults.innerHTML = "";
+  if (!query){ searchResults.style.display = "none"; return; }
 
-  if (query.length === 0) {
-    searchResults.style.display = "none";
-    return;
-  }
-
-  const filtered = videos.filter(video =>
-  video.title.toLowerCase().includes(query) ||
-  video.keywords.toLowerCase().includes(query)
+  const filtered = videos.filter(v =>
+    v.title.toLowerCase().includes(query) ||
+    v.keywords.toLowerCase().includes(query)
   );
 
-  if (filtered.length === 0) {
-    searchResults.style.display = "none";
-    return;
-  }
+  if (!filtered.length){ searchResults.style.display = "none"; return; }
 
-  filtered.forEach(video => {
-    const div = document.createElement("div");
-    div.innerHTML = `<img src="${video.thumbnail}" alt="">
-                     <span>${video.title}</span>`;
-    div.addEventListener("click", () => {
-      window.location.href = video.url;
-    });
-    searchResults.appendChild(div);
+  filtered.forEach(v => {
+    const item = document.createElement("div");
+    item.innerHTML = `<img src="${v.thumbnail}" alt=""><span>${v.title}</span>`;
+    item.addEventListener("click", () => window.location.href = v.url);
+    searchResults.appendChild(item);
   });
-
   searchResults.style.display = "block";
+}
+
+searchInput.addEventListener("input", runSearch);
+searchBtn.addEventListener("click", runSearch);
+searchInput.addEventListener("keydown", (e)=>{
+  if(e.key === "Enter"){ // ir direto pro primeiro resultado
+    const first = searchResults.querySelector("div");
+    if(first){ first.click(); }
+  } else if(e.key === "Escape"){
+    searchResults.style.display = "none";
+  }
 });
 
-// Fechar resultados se clicar fora
-document.addEventListener("click", (e) => {
-  if (!e.target.closest(".search-container")) {
+// fecha ao clicar fora
+document.addEventListener("click", (e)=>{
+  if(!e.target.closest(".search-container")){
     searchResults.style.display = "none";
   }
 });
@@ -384,6 +417,7 @@ document.addEventListener("click", (e) => {
 
 </body>
 </html>
+
 
 
 
