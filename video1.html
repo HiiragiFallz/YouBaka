@@ -184,6 +184,66 @@
     color: #ff457f; /* título rosa também pra combinar */
     
     }
+
+    /* Estilo da barra */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#searchInput {
+  padding: 8px;
+  border-radius: 20px;
+  border: 2px solid #ff457f;
+  background: #1a1a1a;
+  color: #fff;
+  width: 300px;
+}
+
+#searchBtn {
+  margin-left: 5px;
+  background: #ff457f;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.search-results {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: #222;
+  border: 1px solid #ff457f;
+  border-radius: 10px;
+  width: 100%;
+  max-height: 250px;
+  overflow-y: auto;
+  display: none;
+  z-index: 10;
+}
+
+.search-results div {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+}
+
+.search-results div:hover {
+  background: #ff457f33;
+}
+
+.search-results img {
+  width: 60px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 5px;
+}
   </style>
 </head>
 <body>
@@ -194,10 +254,11 @@
       <img src="img/logo.png.png" alt="YouBaka" class="logo-img">
       <h1>You<span>Baka</span></h1>
     </div>
-
-    <div class="search-bar">
-      <input type="text" placeholder="Buscar vídeos...">
-      <button>🔍</button>
+<!-- Barra de pesquisa -->
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Buscar vídeos...">
+      <button id="searchResults">🔍</button>
+      <div id="searchResults" class="search-results"></div>
     </div>
 
     <button class="back-btn" onclick="history.back()">Voltar</button>
@@ -253,10 +314,77 @@
       desc.classList.toggle("expanded");
       btn.textContent = desc.classList.contains("expanded") ? "Mostrar menos" : "Mostrar mais";
     });
+
+    <script>
+// 🔹 Lista de vídeos do site
+const videos = [
+  {
+    title: "Machine Love (feat. Kasane Teto)",
+    keywords: "machine love teto kasane",
+    thumbnail: "img/machine.jpg",
+    url: "video1.html"
+  },
+  {
+    title: "メズマライザー / 初音ミク・重音テト SV",
+    keywords: "mezmaraizer miku teto hatsune",
+    thumbnail: "img/mezma.jpg",
+    url: "video2.html"
+  },
+  {
+    title: "DECO*27 - モニタリング feat. 初音ミク",
+    keywords: "deco monitoring hatsune miku",
+    thumbnail: "img/deco.jpg",
+    url: "video3.html"
+  }
+  // 👉 aqui você vai adicionando todos os outros vídeos
+];
+
+const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
+
+searchInput.addEventListener("input", function() {
+  const query = this.value.toLowerCase();
+  searchResults.innerHTML = "";
+
+  if (query.length === 0) {
+    searchResults.style.display = "none";
+    return;
+  }
+
+  const filtered = videos.filter(video =>
+    video.title.toLowerCase().includes(query) ||
+    video.keywords.toLowerCase().includes(query)
+  );
+
+  if (filtered.length === 0) {
+    searchResults.style.display = "none";
+    return;
+  }
+
+  filtered.forEach(video => {
+    const div = document.createElement("div");
+    div.innerHTML = `<img src="${video.thumbnail}" alt="">
+                     <span>${video.title}</span>`;
+    div.addEventListener("click", () => {
+      window.location.href = video.url;
+    });
+    searchResults.appendChild(div);
+  });
+
+  searchResults.style.display = "block";
+});
+
+// Fechar resultados se clicar fora
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".search-container")) {
+    searchResults.style.display = "none";
+  }
+});
   </script>
 
 </body>
 </html>
+
 
 
 
