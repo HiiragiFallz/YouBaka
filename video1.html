@@ -352,8 +352,8 @@ searchInput.addEventListener("input", function() {
   }
 
   const filtered = videos.filter(video =>
-    video.title.toLowerCase().includes(query) ||
-    video.keywords.includes(query) // 🔹 aqui tava quebrando
+  video.title.toLowerCase().includes(query) ||
+  video.keywords.toLowerCase().includes(query)
   );
 
   if (filtered.length === 0) {
@@ -384,6 +384,7 @@ document.addEventListener("click", (e) => {
 
 </body>
 </html>
+
 
 
 
