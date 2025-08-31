@@ -213,111 +213,103 @@
     btn.addEventListener('click', applyFilter);
   </script>
 
-  <script>
-  const profile = document.querySelector('.profile');
-  const overlay = document.getElementById('loginOverlay');
-  const closeBtn = document.getElementById('closeLogin');
-  const loginBtn = document.getElementById('loginBtn');
-  const logoutBtn = document.getElementById('logoutBtn');
-  const stayLogged = document.getElementById('stayLogged');
+<script>
+  const loginOverlay   = document.getElementById("loginOverlay");
+  const closeLogin     = document.getElementById("closeLogin");
+  const loginBtn       = document.getElementById("loginBtn");
+  const logoutBtn      = document.getElementById("logoutBtn");
+  const profileDiv     = document.querySelector(".profile");
+  const usernameInput  = document.getElementById("username");
+  const emailInput     = document.getElementById("email");
+  const passwordInput  = document.getElementById("password");
+  const confirmInput   = document.getElementById("confirmPassword");
+  const profilePicInput= document.getElementById("profilePicInput");
+  const stayLogged     = document.getElementById("stayLogged");
 
-  // abrir login ao clicar no perfil
-  profile.addEventListener('click', () => {
-    overlay.style.display = 'flex';
+  // Abre modal ao clicar no avatar
+  profileDiv.addEventListener("click", () => {
+    loginOverlay.style.display = "flex";
   });
 
-  // fechar login
-  closeBtn.addEventListener('click', () => {
-    overlay.style.display = 'none';
+  // Fecha modal
+  closeLogin.addEventListener("click", () => {
+    loginOverlay.style.display = "none";
   });
 
-  // carregar login salvo
-  window.addEventListener('load', () => {
-    const savedUser = localStorage.getItem('username');
-    if(savedUser){
-      profile.style.backgroundImage = "url('https://i.imgur.com/0y0y0y0.png')";
-      profile.style.backgroundSize = "cover";
-      loginBtn.style.display = "none";
-      logoutBtn.style.display = "block";
-    }
-  });
-
-  // login
-  loginBtn.addEventListener('click', () => {
-    const user = document.getElementById('username').value.trim();
-    const pass = document.getElementById('password').value;
-    const confirm = document.getElementById('confirmPassword').value;
-
-    if(!user || !pass){ alert("Preencha todos os campos"); return; }
-    if(pass !== confirm){ alert("As senhas não coincidem"); return; }
-
-    if(stayLogged.checked){
-      localStorage.setItem('username', user);
+  // Função para salvar dados
+  function saveUser(user, stay) {
+    if(stay){
+      localStorage.setItem("userData", JSON.stringify(user));
     } else {
-      sessionStorage.setItem('username', user);
+      sessionStorage.setItem("userData", JSON.stringify(user));
+    }
+  }
+
+  // Função para carregar usuário logado
+  function loadUser() {
+    const data = localStorage.getItem("userData") || sessionStorage.getItem("userData");
+    if(data){
+      const user = JSON.parse(data);
+      showProfile(user);
+    }
+  }
+
+  // Mostrar perfil no header
+  function showProfile(user){
+    if(user.profilePic){
+      profileDiv.style.backgroundImage = `url(${user.profilePic})`;
+      profileDiv.style.backgroundSize = "cover";
+    } else {
+      profileDiv.style.backgroundImage = "none";
+    }
+    loginOverlay.style.display = "none";
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "inline-block";
+  }
+
+  // LOGIN
+  loginBtn.addEventListener("click", () => {
+    const username = usernameInput.value.trim();
+    const email    = emailInput.value.trim();
+    const pass     = passwordInput.value;
+    const confirm  = confirmInput.value;
+
+    if(!username || !email || !pass){
+      alert("Preencha todos os campos.");
+      return;
+    }
+    if(pass !== confirm){
+      alert("As senhas não coincidem.");
+      return;
     }
 
-    profile.style.backgroundImage = "url('https://i.imgur.com/0y0y0y0.png')";
-    profile.style.backgroundSize = "cover";
+    let profilePic = "";
+    if(profilePicInput.files.length > 0){
+      const file = profilePicInput.files[0];
+      profilePic = URL.createObjectURL(file);
+    }
 
-    loginBtn.style.display = "none";
-    logoutBtn.style.display = "block";
-    overlay.style.display = "none";
+    const user = {username, email, profilePic};
+    saveUser(user, stayLogged.checked);
+    showProfile(user);
   });
 
-  // logout
-  logoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('username');
-    sessionStorage.removeItem('username');
-    profile.style.backgroundImage = "none";
-    loginBtn.style.display = "block";
+  // LOGOUT
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("userData");
+    sessionStorage.removeItem("userData");
+    profileDiv.style.backgroundImage = "none";
     logoutBtn.style.display = "none";
-    overlay.style.display = "none";
+    loginBtn.style.display = "inline-block";
   });
+
+  // Carregar usuário se já estiver logado
+  loadUser();
 </script>
 
-  <script>
-  const profilePicInput = document.getElementById('profilePicInput');
-
-// se já existir foto salva, carrega ela
-window.addEventListener('load', () => {
-  const savedUser = localStorage.getItem('username') || sessionStorage.getItem('username');
-  const savedPic  = localStorage.getItem('profilePic') || sessionStorage.getItem('profilePic');
-
-  if(savedUser){
-    if(savedPic){
-      profile.style.backgroundImage = `url(${savedPic})`;
-    } else {
-      profile.style.backgroundImage = "url('https://i.imgur.com/0y0y0y0.png')";
-    }
-    profile.style.backgroundSize = "cover";
-    loginBtn.style.display = "none";
-    logoutBtn.style.display = "block";
-  }
-});
-
-// quando o usuário selecionar uma foto
-profilePicInput.addEventListener('change', () => {
-  const file = profilePicInput.files[0];
-  if(file){
-    const reader = new FileReader();
-    reader.onload = e => {
-      profile.style.backgroundImage = `url(${e.target.result})`;
-      profile.style.backgroundSize = "cover";
-
-      // salva junto com o login (se já tiver feito login)
-      if(stayLogged.checked){
-        localStorage.setItem('profilePic', e.target.result);
-      } else {
-        sessionStorage.setItem('profilePic', e.target.result);
-      }
-    };
-    reader.readAsDataURL(file);
-  }
-});
-</script>
 </body>
 </html>
+
 
 
 
