@@ -190,15 +190,23 @@
   position: relative;
   display: flex;
   align-items: center;
+  background: #1a1a1a;
+  border: 2px solid #ff457f;
+  border-radius: 25px;
+  padding: 5px 10px;
+  width: 500px;   /* 🔹 Aumenta a largura */
+  max-width: 90%; /* 🔹 Responsivo */
 }
 
 #searchInput {
-  padding: 8px;
+  flex: 1;
+  padding: 10px;
   border-radius: 20px;
-  border: 2px solid #ff457f;
-  background: #1a1a1a;
+  border: none;          /* 🔹 Remove a borda duplicada */
+  background: transparent;
   color: #fff;
-  width: 300px;
+  font-size: 16px;       /* 🔹 Texto maior */
+  outline: none;         /* 🔹 Remove o contorno azul feio */
 }
 
 #searchBtn {
@@ -256,7 +264,7 @@
     </div>
 <!-- Barra de pesquisa -->
     <div class="search-container">
-  <input type="text" id="searchInput" placeholder="Buscar vídeos...">
+  <input type="text" id="searchInput" placeholder="Buscar vídeos..." autocomplete="off">
   <button id="searchBtn">🔍</button> <!-- ✅ troquei o id -->
   <div id="searchResults" class="search-results"></div>
 </div>
@@ -417,6 +425,7 @@ document.addEventListener("click", (e)=>{
 
 </body>
 </html>
+
 
 
 
