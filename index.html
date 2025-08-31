@@ -1,206 +1,166 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>YouBaka</title>
   <style>
+    :root { --pink:#ff457f; }
+
+    * { box-sizing: border-box; }
     body {
       margin: 0;
+      background:#1a1a1a;
+      color:#fff;
       font-family: Arial, sans-serif;
-      background-color: #181818;
-      color: #fff;
     }
 
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      background-color: #202020;
-      margin-bottom: 20px; /* espaço entre header e vídeos */
+    /* HEADER */
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 40px; background:#111; border-bottom:2px solid var(--pink);
+      gap:24px; margin-bottom:24px;
+    }
+    .logo{ display:flex; align-items:center; gap:12px; }
+    .logo img{ width:44px; height:44px; border-radius:10px; background:#222; }
+    .logo h1{ margin:0; font-size:24px; font-weight:800; }
+    .logo h1 span{ color:var(--pink); }
+
+    /* SEARCH */
+    .search-wrap{ flex:1; display:flex; justify-content:center; }
+    .search-bar{
+      width: min(720px, 90%);
+      display:flex; align-items:center; gap:10px;
+      background:#1a1a1a; border:2px solid var(--pink); border-radius:28px;
+      padding:8px 14px;
+    }
+    .search-bar input{
+      flex:1; border:none; outline:none; background:transparent;
+      color:#fff; font-size:16px;
+    }
+    .search-bar button{
+      border:none; background:transparent; color:var(--pink);
+      font-size:18px; cursor:pointer;
     }
 
-    /* Ícone e logo */
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    /* MENU RIGHT */
+    .menu{ display:flex; align-items:center; gap:22px; }
+    .menu a{ color:var(--pink); text-decoration:none; font-weight:700; font-size:18px; }
+    .profile{ width:44px; height:44px; border-radius:50%; background:#000; border:2px solid var(--pink); }
+
+    /* GRID */
+    main.grid{
+      display:grid; grid-template-columns:repeat(5, minmax(0,1fr));
+      gap:26px; padding:0 40px 40px;
     }
 
-    .logo-box {
-      width: 40px;
-      height: 40px;
-      background: #b33;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: bold;
+    /* CARD */
+    .thumb{
+      display:flex; flex-direction:column; gap:10px;
+      text-decoration:none; color:#fff; transition:transform .25s ease;
+    }
+    .thumb img{
+      width:100%; height:160px; object-fit:cover;
+      border-radius:12px; border:2px solid var(--pink);
+      transition:transform .25s ease, box-shadow .25s ease;
+      display:block;
+    }
+    .thumb:hover img{ transform:scale(1.05); box-shadow:0 0 18px var(--pink); }
+    .thumb p{
+      margin:0; font-size:14px; font-weight:800; color:var(--pink); line-height:1.25;
     }
 
-    .logo h1 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    /* Barra de pesquisa */
-    .search-bar {
-      flex: 1;
-      max-width: 600px;
-      margin: 0 40px;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-bar input {
-      width: 100%;
-      padding: 8px 12px;
-      border: none;
-      border-radius: 20px;
-      outline: none;
-      font-size: 14px;
-    }
-
-    /* Navegação direita + perfil */
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #fff;
-      font-weight: bold;
-    }
-
-    .profile-pic {
-      width: 40px;
-      height: 40px;
-      background: #555;
-      border-radius: 50%;
-    }
-
-    /* Grid de vídeos */
-    main.grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 20px;
-      padding: 0 20px 20px;
-    }
-
-    .thumb {
-      text-decoration: none;
-      color: #fff;
-      transition: transform 0.2s ease;
-    }
-
-    .thumb:hover {
-      transform: scale(1.05);
-    }
-
-    .thumb img {
-      width: 100%;
-      height: 150px; /* altura fixa */
-      object-fit: cover; /* corta e ajusta mantendo proporção */
-      border-radius: 12px;
-      display: block;
-    }
-
-    .thumb p {
-      margin-top: 8px;
-      font-size: 14px;
-      font-weight: bold;
-      line-height: 1.2em;
-    }
+    /* RESPONSIVO (opcional) */
+    @media (max-width:1200px){ main.grid{ grid-template-columns:repeat(4,1fr); } }
+    @media (max-width:900px){  main.grid{ grid-template-columns:repeat(3,1fr); } }
+    @media (max-width:640px){  main.grid{ grid-template-columns:repeat(2,1fr); padding:0 16px 24px; } header{ padding:12px 16px; } }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">
-      <div class="logo-box">logo</div>
-      <h1>YouBaka</h1>
+      <img src="https://via.placeholder.com/44x44?text=logo" alt="logo">
+      <h1>You<span>Baka</span></h1>
     </div>
 
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Buscar vídeos...">
+    <div class="search-wrap">
+      <div class="search-bar">
+        <input id="searchInput" type="text" placeholder="Buscar vídeos…" />
+        <button id="searchBtn" aria-label="buscar">🔍</button>
+      </div>
     </div>
 
-    <nav>
+    <div class="menu">
       <a href="#">Playlists</a>
-      <div class="profile-pic"></div> <!-- foto de perfil do usuário futuramente -->
-    </nav>
+      <div class="profile" title="Perfil"></div>
+    </div>
   </header>
 
   <main class="grid" id="videoGrid">
     <!-- 1 -->
-    <a href="video1.html" class="thumb" data-keywords="machine love teto jamie paige">
-      <img src="https://i.ytimg.com/vi/sqK-jh4TDXo/hq720.jpg" alt="Machine Love">
+    <a href="video1.html" class="thumb" data-keywords="machine love jamie paige teto kasane">
+      <img src="https://i.ytimg.com/vi/sqK-jh4TDXo/hq720.jpg" alt="Machine Love (feat. Kasane Teto)">
       <p>Machine Love (feat. Kasane Teto)</p>
     </a>
 
     <!-- 2 -->
-    <a href="video2.html" class="thumb" data-keywords="mezmerizer hatsune miku teto">
-      <img src="https://i.ytimg.com/vi/19y8YTbvri8/hq720.jpg" alt="メズマライザー">
+    <a href="video2.html" class="thumb" data-keywords="mezumaraiza mesmerizer hatsune miku teto japanese">
+      <img src="https://i.ytimg.com/vi/19y8YTbvri8/hq720.jpg" alt="メズマライザー / 初音ミク・重音テトSV">
       <p>メズマライザー / 初音ミク・重音テトSV</p>
     </a>
 
     <!-- 3 -->
-    <a href="video3.html" class="thumb" data-keywords="deco27 monitoring hatsune miku">
-      <img src="https://i.ytimg.com/vi/kbNdx0yqbZE/hq720.jpg" alt="Monitoring">
+    <a href="video3.html" class="thumb" data-keywords="monitoring deco27 モニタリング hatsune miku">
+      <img src="https://i.ytimg.com/vi/kbNdx0yqbZE/hq720.jpg" alt="DECO*27 - モニタリング feat. 初音ミク">
       <p>DECO*27 - モニタリング feat. 初音ミク</p>
     </a>
 
     <!-- 4 -->
-    <a href="video4.html" class="thumb" data-keywords="birdbrain hev mix">
+    <a href="video4.html" class="thumb" data-keywords="birdbrain hev mix teto">
       <img src="https://i.ytimg.com/vi/NA0EfgjfZH8/hq720.jpg" alt="Birdbrain (HEV mix)">
       <p>Birdbrain (HEV mix)</p>
     </a>
 
     <!-- 5 -->
-    <a href="video5.html" class="thumb" data-keywords="sawtowne confessions rotten girl miku">
-      <img src="https://i.ytimg.com/vi/sV2H712ldOI/hq720.jpg" alt="Confessions of a Rotten Girl">
+    <a href="video5.html" class="thumb" data-keywords="confessions rotten girl sawtowne hatsune miku">
+      <img src="https://i.ytimg.com/vi/sV2H712ldOI/hq720.jpg" alt="SAWTOWNE - Confessions of a Rotten Girl (ft. Hatsune Miku)">
       <p>SAWTOWNE - Confessions of a Rotten Girl (ft. Hatsune Miku)</p>
     </a>
 
     <!-- 6 -->
     <a href="video6.html" class="thumb" data-keywords="birdbrain ok glass teto">
-      <img src="https://i.ytimg.com/vi/0iVlSNpq8i8/hq720.jpg" alt="Birdbrain w/ OK Glass">
+      <img src="https://i.ytimg.com/vi/0iVlSNpq8i8/hq720.jpg" alt="BIRDBRAIN (w/ OK Glass) feat. Kasane Teto">
       <p>BIRDBRAIN (w/ OK Glass) feat. Kasane Teto</p>
     </a>
 
     <!-- 7 -->
-    <a href="video7.html" class="thumb" data-keywords="retry now hatsune miku">
-      <img src="https://i.ytimg.com/vi/3iUgKH8c7p4/hq720.jpg" alt="いまずぐ輪廻">
+    <a href="video7.html" class="thumb" data-keywords="retry now いまずぐ輪廻 hatsune miku">
+      <img src="https://i.ytimg.com/vi/3iUgKH8c7p4/hq720.jpg" alt="いまずぐ輪廻 / 初音ミク">
       <p>いまずぐ輪廻 / 初音ミク</p>
     </a>
 
     <!-- 8 -->
-    <a href="video8.html" class="thumb" data-keywords="fire vane jamiep teto">
-      <img src="https://i.ytimg.com/vi/yZkPe7TEuyk/hq720.jpg" alt="FIRE!!!">
+    <a href="video8.html" class="thumb" data-keywords="fire vane jamie paige teto">
+      <img src="https://i.ytimg.com/vi/yZkPe7TEuyk/hq720.jpg" alt="Vane & JamieP - FIRE!!! (feat. Kasane Teto)">
       <p>Vane & JamieP - FIRE!!! (feat. Kasane Teto)</p>
     </a>
   </main>
 
   <script>
-    // filtro da barra de pesquisa
-    const searchInput = document.getElementById('searchInput');
-    const videoGrid = document.getElementById('videoGrid');
-    const videos = videoGrid.getElementsByClassName('thumb');
+    const input  = document.getElementById('searchInput');
+    const btn    = document.getElementById('searchBtn');
+    const cards  = document.querySelectorAll('.thumb');
 
-    searchInput.addEventListener('input', function () {
-      const search = this.value.toLowerCase();
-      for (let video of videos) {
-        const title = video.innerText.toLowerCase();
-        const keywords = video.dataset.keywords.toLowerCase();
-        if (title.includes(search) || keywords.includes(search)) {
-          video.style.display = '';
-        } else {
-          video.style.display = 'none';
-        }
-      }
-    });
+    function applyFilter() {
+      const q = input.value.trim().toLowerCase();
+      cards.forEach(card => {
+        const title = card.querySelector('p').textContent.toLowerCase();
+        const keys  = (card.dataset.keywords || '').toLowerCase();
+        card.style.display = (!q || title.includes(q) || keys.includes(q)) ? '' : 'none';
+      });
+    }
+    input.addEventListener('input', applyFilter);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') applyFilter(); });
+    btn.addEventListener('click', applyFilter);
   </script>
 </body>
 </html>
