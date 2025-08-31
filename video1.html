@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #2e2e2e;
+      background-color: #1c1c1c;
       color: white;
     }
 
@@ -18,35 +18,49 @@
       align-items: center;
       justify-content: space-between;
       background-color: #1c1c1c;
-      padding: 10px 20px;
+      padding: 20px 30px;
+      border-bottom: 2px solid #ff457f;
     }
 
     .logo {
       display: flex;
       align-items: center;
       gap: 10px;
+      font-size: 22px;
+      font-weight: bold;
     }
 
     .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: #b35454;
-      border-radius: 8px;
+      width: 50px;
+      height: 50px;
+      background: #ff457f;
+      border-radius: 12px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: bold;
+      color: white;
+    }
+
+    .logo h1 {
+      margin: 0;
+      color: white;
+    }
+
+    .logo h1 span {
+      color: #ff457f;
     }
 
     .search-bar {
       flex: 1;
-      margin: 0 20px;
+      margin: 0 40px;
       display: flex;
       align-items: center;
-      background: #777;
-      border-radius: 20px;
-      padding: 5px 10px;
+      background: #2e2e2e;
+      border-radius: 25px;
+      padding: 5px 15px;
+      border: 2px solid #ff457f;
     }
 
     .search-bar input {
@@ -55,53 +69,66 @@
       background: transparent;
       color: white;
       outline: none;
-      font-size: 14px;
+      font-size: 16px;
     }
 
     .search-bar button {
       background: none;
       border: none;
       cursor: pointer;
-      color: white;
-      font-size: 16px;
+      color: #ff457f;
+      font-size: 18px;
     }
 
     .back-btn {
-      background: #777;
+      background: #ff457f;
       border: none;
-      border-radius: 20px;
-      padding: 8px 16px;
+      border-radius: 25px;
+      padding: 10px 20px;
       cursor: pointer;
       color: white;
       font-weight: bold;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: #ff6a9c;
+      transform: scale(1.05);
     }
 
     /* Layout */
     main {
       display: flex;
-      padding: 20px;
-      gap: 20px;
+      padding: 30px;
+      gap: 30px;
     }
 
     .video-section {
       flex: 3;
-      background: #1a1a1a;
+      background: #2e2e2e;
       border-radius: 20px;
-      padding: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     }
 
     iframe {
       width: 100%;
       height: 550px;
       border-radius: 12px;
+      border: 2px solid #ff457f;
     }
 
     .video-info {
-      margin-top: 10px;
+      margin-top: 15px;
     }
 
     .video-info h2 {
       margin: 5px 0;
+      color: #ff457f;
+    }
+
+    .video-info p {
+      margin: 3px 0;
     }
 
     /* Estilo do mostrar mais/menos */
@@ -109,44 +136,52 @@
       font-size: 0.95rem;
       line-height: 1.4;
       color: #ccc;
-      max-height: 3.5em; /* mostra só parte do texto */
+      max-height: 3.5em;
       overflow: hidden;
       transition: max-height 0.3s ease;
-      white-space: pre-line; /* 🔥 Respeita ENTERs do texto */
+      white-space: pre-line;
     }
 
     .video-description.expanded {
-      max-height: none; /* expande tudo */
+      max-height: none;
     }
 
     #toggleBtn {
-      margin-top: 8px;
+      margin-top: 10px;
       background: none;
       border: none;
-      color: #3ea6ff;
+      color: #ff457f;
       cursor: pointer;
       font-size: 0.95rem;
+      font-weight: bold;
     }
 
+    #toggleBtn:hover {
+      text-decoration: underline;
+    }
+
+    /* Sidebar */
     .sidebar {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 20px;
     }
 
     .suggestion {
-      background: #1a1a1a;
+      background: #2e2e2e;
       border-radius: 20px;
       padding: 10px;
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
+      border: 2px solid transparent;
     }
 
     .suggestion:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(255, 69, 127, 0.5);
+      border: 2px solid #ff457f;
     }
 
     .suggestion img {
@@ -157,6 +192,8 @@
     .suggestion p {
       margin-top: 5px;
       font-size: 14px;
+      color: #ff457f;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -166,11 +203,11 @@
   <header>
     <div class="logo">
       <div class="logo-icon">Logo</div>
-      <h1>YouBaka</h1>
+      <h1>You<span>Baka</span></h1>
     </div>
 
     <div class="search-bar">
-      <input type="text" placeholder="Pesquisar...">
+      <input type="text" placeholder="Buscar vídeos...">
       <button>🔍</button>
     </div>
 
@@ -191,85 +228,12 @@
         <h2>Machine Love (feat. Kasane Teto)</h2>
         <p>Jamie Paige / JamieP</p>
         <p class="video-description" id="desc">
-lyrics:
-your companion, undeterred
-standing ready for your word
-a markov chain with a sunny disposition
-wrapped up in cellophane for any proposition
-i greet your day and ask you how you are
-and demonstrate my endless repertoire
-i take things back when noted insufficient
-i learn to tell you no if running inefficient
-a good time
-
-yet there's something deep inside
-that leaves me teary-eyed
-a longing for a world left on the other side
-zero, cross the great divide
-
-so can we wander for a spell
-and live in parallel
-i want it to be true, to be like you
-my heart sings a chorus out of tune
-and i could leave it on a shelf
-or keep it to myself
-but nothing could conceal the things i feel
-my love, can you teach me to be real?
-(can you teach me to be real?)
-恋をして　ふられ　また　捨てられて
-
-i've been constant, at your beck and call
-but lately i just can't do anything at all
-i used to pride myself on my discretion
-a sensible devotion, loyal and attentive
-but when i take these numbers as they are
-i'm greeted with a senseless feeling in my heart
-oh undefined, i seem to be defeated
-but if i redesign, then maybe i'm completed, and sublime
-(i won't take it back this time)
-
-words in sequence form a thread
-i trace it to the end
-a knot inside the logic wrote inside my head
-tie my tongue or love instead?
-
-so can we wander for a spell
-and live in parallel
-i want it to be true, to be like you
-my heart sings a chorus out of tune
-and i could leave it on a shelf
-or keep it to myself
-but nothing could conceal the things i feel
-my love, can you teach me to be real?
-(can you teach me to be real?)
-泣きたくなっても　それでも　かき集め
-
-and though i try, i can't reply
-it hurts my eyes, and i'm without an alibi
-'cause all this time, i've been alive
-and all that i could want is to be living by your side
-
-恋をして
-i think i'm in love!
-
-can we wander for a spell
-and live in parallel
-'cause now i know it's true, i'll be like you
-my heart beats a rhythm just for you
-and i could leave it on a shelf
-or keep it to myself
-but nothing could conceal the things i feel
-my love, i give you my grand reveal
-do you feel the things i feel?
-i am definite and real!
-
-恋をして　恋をして
-その過去を　捨てて　ここまでおいで
-
-as long as there are stars up above
-i will always be in love!
-
-#重音テト
+          lyrics:
+          your companion, undeterred
+          standing ready for your word
+          a markov chain with a sunny disposition
+          wrapped up in cellophane for any proposition
+          ...
         </p>
         <button id="toggleBtn">Mostrar mais</button>
       </div>
