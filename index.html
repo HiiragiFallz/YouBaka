@@ -174,10 +174,10 @@ async function loadVideos() {
   const response = await fetch("data/videos.csv");
   const text = await response.text();
 
-  // Quebrar em linhas e remover o cabeçalho
+  // Quebrar em linhas e remover cabeçalho
   let lines = text.split("\n").slice(1).filter(l => l.trim());
 
-  // 🔀 Embaralhar as linhas (Fisher-Yates shuffle)
+  // 🔀 Embaralhar
   for (let i = lines.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [lines[i], lines[j]] = [lines[j], lines[i]];
@@ -200,14 +200,34 @@ async function loadVideos() {
 
     grid.appendChild(a);
   });
+
+  // 🔎 Barra de pesquisa (depois que os vídeos existem)
+  const input  = document.getElementById('searchInput');
+  const btn    = document.getElementById('searchBtn');
+  const cards  = document.querySelectorAll('.thumb');
+
+  function applyFilter() {
+    const q = input.value.trim().toLowerCase();
+    cards.forEach(card => {
+      const title = card.querySelector('p').textContent.toLowerCase();
+      const keys  = (card.dataset.keywords || '').toLowerCase();
+      card.style.display = (!q || title.includes(q) || keys.includes(q)) ? '' : 'none';
+    });
+  }
+
+  input.addEventListener('input', applyFilter);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') applyFilter(); });
+  btn.addEventListener('click', applyFilter);
 }
 
 document.addEventListener("DOMContentLoaded", loadVideos);
 </script>
 
 
+
 </body>
 </html>
+
 
 
 
