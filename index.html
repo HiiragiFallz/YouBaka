@@ -192,9 +192,31 @@
   });
 </script>
 
+  <!-- 🔎 Script da pesquisa -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const input  = document.getElementById('searchInput');
+    const btn    = document.getElementById('searchBtn');
+    const cards  = document.querySelectorAll('.thumb');
+
+    function applyFilter() {
+      const q = input.value.trim().toLowerCase();
+      cards.forEach(card => {
+        const title = card.querySelector('p').textContent.toLowerCase();
+        const keys  = (card.dataset.keywords || '').toLowerCase();
+        card.style.display = (!q || title.includes(q) || keys.includes(q)) ? '' : 'none';
+      });
+    }
+
+    input.addEventListener('input', applyFilter);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') applyFilter(); });
+    btn.addEventListener('click', applyFilter);
+  });
+</script>
 
 </body>
 </html>
+
 
 
 
