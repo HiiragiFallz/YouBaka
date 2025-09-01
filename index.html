@@ -174,150 +174,28 @@
     </a>
   </main>
 
-  <!-- MODAL DE LOGIN -->
-<div class="login-overlay" id="loginOverlay">
-  <div class="login-box">
-    <span class="close" id="closeLogin">✖</span>
-    <h2>Login</h2>
-    <input type="text" id="username" placeholder="Nome de usuário" />
-    <input type="email" id="email" placeholder="Email" />
-    <input type="password" id="password" placeholder="Senha" />
-    <input type="password" id="confirmPassword" placeholder="Confirmar senha" />
-
-    <input type="file" id="profilePicInput" accept="image/*" />
-
-    <label style="font-size:14px;">
-      <input type="checkbox" id="stayLogged"> Manter conectado
-    </label>
-    <button id="loginBtn">Entrar</button>
-    <button id="logoutBtn" style="display:none; background:#444;">Sair</button>
-  </div>
-</div>
-  
   <script>
-    const input  = document.getElementById('searchInput');
-    const btn    = document.getElementById('searchBtn');
-    const cards  = document.querySelectorAll('.thumb');
-
-    function applyFilter() {
-      const q = input.value.trim().toLowerCase();
-      cards.forEach(card => {
-        const title = card.querySelector('p').textContent.toLowerCase();
-        const keys  = (card.dataset.keywords || '').toLowerCase();
-        card.style.display = (!q || title.includes(q) || keys.includes(q)) ? '' : 'none';
-      });
-    }
-    input.addEventListener('input', applyFilter);
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') applyFilter(); });
-    btn.addEventListener('click', applyFilter);
-  </script>
-
-<script>
   const profile = document.querySelector('.profile');
-  const overlay = document.getElementById('loginOverlay');
-  const closeBtn = document.getElementById('closeLogin');
-  const loginBtn = document.getElementById('loginBtn');
-  const logoutBtn = document.getElementById('logoutBtn');
-  const stayLogged = document.getElementById('stayLogged');
-  const profilePicInput = document.getElementById('profilePicInput');
 
-// abrir login ao clicar no perfil, só se não estiver logado
-profile.addEventListener('click', () => {
-  const loggedUser = localStorage.getItem('username') || sessionStorage.getItem('username');
-  if(!loggedUser){ 
-    overlay.style.display = 'flex'; 
-  }
-});
+  // imagens possíveis
+  const avatars = [
+    "url('https://i.imgur.com/1FBKZ78.png')", // imagem da Miku
+    "url('https://i.imgur.com/DlND9HZ.png')", // imagem da Teto
+    "url('https://i.imgur.com/RBGP46j.png')"  // imagem da Neru
+  ];
 
-
-  // fechar login
-  closeBtn.addEventListener('click', () => {
-    overlay.style.display = 'none';
-  });
-
-  // carregar login salvo
+  // escolhe uma aleatória
   window.addEventListener('load', () => {
-    const savedUser = localStorage.getItem('username') || sessionStorage.getItem('username');
-    const savedPic  = localStorage.getItem('profilePic') || sessionStorage.getItem('profilePic');
-
-    if(savedUser){
-      if(savedPic){
-        profile.style.backgroundImage = `url(${savedPic})`;
-      } else {
-        profile.style.backgroundImage = "url('https://i.imgur.com/0y0y0y0.png')";
-      }
-      profile.style.backgroundSize = "cover";
-      loginBtn.style.display = "none";
-      logoutBtn.style.display = "block";
-    }
-  });
-
-  // login
-  loginBtn.addEventListener('click', () => {
-    const user = document.getElementById('username').value.trim();
-    const pass = document.getElementById('password').value;
-    const confirm = document.getElementById('confirmPassword').value;
-
-    if(!user || !pass){ alert("Preencha todos os campos"); return; }
-    if(pass !== confirm){ alert("As senhas não coincidem"); return; }
-
-    if(stayLogged.checked){
-      localStorage.setItem('username', user);
-    } else {
-      sessionStorage.setItem('username', user);
-    }
-
-    // se já tiver uma foto escolhida, salva
-    if(profile.style.backgroundImage){
-      const currentPic = profile.style.backgroundImage.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-      if(stayLogged.checked){
-        localStorage.setItem('profilePic', currentPic);
-      } else {
-        sessionStorage.setItem('profilePic', currentPic);
-      }
-    }
-
-    loginBtn.style.display = "none";
-    logoutBtn.style.display = "block";
-    overlay.style.display = "none";
-  });
-
-  // logout
-  logoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('username');
-    localStorage.removeItem('profilePic');
-    sessionStorage.removeItem('username');
-    sessionStorage.removeItem('profilePic');
-    profile.style.backgroundImage = "none";
-    loginBtn.style.display = "block";
-    logoutBtn.style.display = "none";
-    overlay.style.display = "none";
-  });
-
-  // quando o usuário selecionar uma foto
-  profilePicInput.addEventListener('change', () => {
-    const file = profilePicInput.files[0];
-    if(file){
-      const reader = new FileReader();
-      reader.onload = e => {
-        profile.style.backgroundImage = `url(${e.target.result})`;
-        profile.style.backgroundSize = "cover";
-
-        // salva junto com o login
-        if(stayLogged.checked){
-          localStorage.setItem('profilePic', e.target.result);
-        } else {
-          sessionStorage.setItem('profilePic', e.target.result);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
+    const random = Math.floor(Math.random() * avatars.length);
+    profile.style.backgroundImage = avatars[random];
+    profile.style.backgroundSize = "cover";
   });
 </script>
 
 
 </body>
 </html>
+
 
 
 
