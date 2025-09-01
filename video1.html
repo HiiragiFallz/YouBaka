@@ -405,7 +405,7 @@ function runSearch(){
 
   filtered.forEach(v => {
     const item = document.createElement("div");
-    item.innerHTML = ` <img src="${v.thumbnail}" alt=""><span>${v.title}</span>;
+    item.innerHTML = `<img src="${v.thumbnail}" alt=""><span>${v.title}</span>`;
     item.addEventListener("click", () => window.location.href = v.url);
     searchResults.appendChild(item);
   });
@@ -433,4 +433,5 @@ document.addEventListener("click", (e)=>{
 
 </body>
 </html>
+
 
