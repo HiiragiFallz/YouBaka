@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>YouBaka</title>
+   <!-- 🔥 Favicon -->
+  <link rel="icon" type="image/png" href="img/fafatvicon.png">
+  
+  <style>
+    :root { --blue:#45f6ff; }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:#1a1a1a;
+      color:#fff;
+      font-family: Arial, sans-serif;
+    }
+
+    /* HEADER */
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 40px; background:#111; border-bottom:2px solid var(--blue);
+      gap:24px; margin-bottom:24px;
+    }
+    .logo{ display:flex; align-items:center; gap:12px; }
+    .logo img{ width:80px; height:80px; }
+    .logo h1{ margin:0; font-size:24px; font-weight:800; }
+    .logo h1 span{ color:var(--blue); }
+
+    /* SEARCH */
+    .search-wrap{ flex:1; display:flex; justify-content:center; }
+    .search-bar{
+      width: min(720px, 90%);
+      display:flex; align-items:center; gap:10px;
+      background:#1a1a1a; border:2px solid var(--blue); border-radius:28px;
+      padding:8px 14px;
+    }
+    .search-bar input{
+      flex:1; border:none; outline:none; background:transparent;
+      color:#fff; font-size:16px;
+    }
+    .search-bar button{
+      border:none; background:transparent; color:var(--blue);
+      font-size:18px; cursor:pointer;
+    }
+
+    /* MENU RIGHT */
+    .menu{ display:flex; align-items:center; gap:30px; }
+    .menu a{ color:var(--blue); text-decoration:none; font-weight:700; font-size:30px; }
+    .profile{ width:60px; height:60px; border-radius:50%; background:#000; border:2px solid var(--blue); }
+
+    /* GRID */
+    main.grid{
+      display:grid; grid-template-columns:repeat(5, minmax(0,1fr));
+      gap:26px; padding:0 40px 40px;
+    }
+
+    /* CARD */
+    .thumb{
+      display:flex; flex-direction:column; gap:10px;
+      text-decoration:none; color:#fff; transition:transform .25s ease;
+    }
+    .thumb img{
+      width:100%; height:210px; object-fit:cover;
+      border-radius:12px; border:2px solid var(--blue);
+      transition:transform .25s ease, box-shadow .25s ease;
+      display:block;
+    }
+    .thumb:hover img{ transform:scale(1.05); box-shadow:0 0 18px var(--blue); }
+    .thumb p{
+      margin:0; font-size:14px; font-weight:800; color:var(--blue); line-height:1.25;
+    }
+
+    /* RESPONSIVO (opcional) */
+    @media (max-width:1200px){ main.grid{ grid-template-columns:repeat(4,1fr); } }
+    @media (max-width:900px){  main.grid{ grid-template-columns:repeat(3,1fr); } }
+    @media (max-width:640px){  main.grid{ grid-template-columns:repeat(2,1fr); padding:0 16px 24px; } header{ padding:12px 16px; } }
+
+    /* LOGIN MODAL */
+.login-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none; justify-content: center; align-items: center;
+  z-index: 999;
+}
+.login-box {
+  background: #222;
+  border: 2px solid var(--blue);
+  padding: 30px;
+  border-radius: 12px;
+  width: 320px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.login-box h2 { margin:0 0 10px; text-align:center; color:var(--blue); }
+.login-box input {
+  padding: 10px; border-radius: 6px; border: 1px solid #444;
+  background:#111; color:#fff; font-size:14px;
+}
+.login-box button {
+  padding: 10px; border:none; border-radius: 6px;
+  background: var(--blue); color:#fff; font-weight:700; cursor:pointer;
+}
+.login-box .close {
+  position: absolute; top: 20px; right: 20px; font-size: 22px;
+  color: #fff; cursor:pointer;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://i.imgur.com/YmvnZi9.png" alt="logo">
+      <h1>You<span>Baka</span></h1>
+    </div>
+
+    <div class="search-wrap">
+      <div class="search-bar">
+        <input id="searchInput" type="text" placeholder="Buscar vídeos…" autocomplete="off"/>
+        <button id="searchBtn" aria-label="buscar">🔍</button>
+      </div>
+    </div>
+
+    <div class="menu">
+      <a href="index.html" class="covers-link">Original</a>
+      <div class="profile" title="Perfil"></div>
+    </div>
+  </header>
+
+  <main class="grid" id="videoGrid">
+    <!-- 1 -->
+    <a href="video1.html" class="thumb" data-keywords="machine love jamie paige teto kasane">
+      <img src="https://i.ytimg.com/vi/sqK-jh4TDXo/hq720.jpg" alt="Machine Love (feat. Kasane Teto)">
+      <p>Machine Love (feat. Kasane Teto)</p>
+    </a>
+
+    <!-- 2 -->
+    <a href="video2.html" class="thumb" data-keywords="mezumaraiza mesmerizer hatsune miku teto japanese">
+      <img src="https://i.ytimg.com/vi/19y8YTbvri8/hq720.jpg" alt="メズマライザー / 初音ミク・重音テトSV">
+      <p>メズマライザー / 初音ミク・重音テトSV</p>
+    </a>
+
+    <!-- 3 -->
+    <a href="video3.html" class="thumb" data-keywords="monitoring deco27 モニタリング hatsune miku">
+      <img src="https://i.ytimg.com/vi/kbNdx0yqbZE/hq720.jpg" alt="DECO*27 - モニタリング feat. 初音ミク">
+      <p>DECO*27 - モニタリング feat. 初音ミク</p>
+    </a>
+
+    <!-- 4 -->
+    <a href="video4.html" class="thumb" data-keywords="birdbrain hev mix teto">
+      <img src="https://i.ytimg.com/vi/NA0EfgjfZH8/hq720.jpg" alt="Birdbrain (HEV mix)">
+      <p>Birdbrain (HEV mix)</p>
+    </a>
+
+    <!-- 5 -->
+    <a href="video5.html" class="thumb" data-keywords="confessions rotten girl sawtowne hatsune miku">
+      <img src="https://i.ytimg.com/vi/sV2H712ldOI/hq720.jpg" alt="SAWTOWNE - Confessions of a Rotten Girl (ft. Hatsune Miku)">
+      <p>SAWTOWNE - Confessions of a Rotten Girl (ft. Hatsune Miku)</p>
+    </a>
+
+    <!-- 6 -->
+    <a href="video6.html" class="thumb" data-keywords="birdbrain ok glass teto">
+      <img src="https://i.ytimg.com/vi/0iVlSNpq8i8/hq720.jpg" alt="BIRDBRAIN (w/ OK Glass) feat. Kasane Teto">
+      <p>BIRDBRAIN (w/ OK Glass) feat. Kasane Teto</p>
+    </a>
+
+    <!-- 7 -->
+    <a href="video7.html" class="thumb" data-keywords="retry now いまずぐ輪廻 hatsune miku">
+      <img src="https://i.ytimg.com/vi/3iUgKH8c7p4/hq720.jpg" alt="いまずぐ輪廻 / 初音ミク">
+      <p>いまずぐ輪廻 / 初音ミク</p>
+    </a>
+
+    <!-- 8 -->
+    <a href="video8.html" class="thumb" data-keywords="fire vane jamie paige teto">
+      <img src="https://i.ytimg.com/vi/yZkPe7TEuyk/hq720.jpg" alt="Vane & JamieP - FIRE!!! (feat. Kasane Teto)">
+      <p>Vane & JamieP - FIRE!!! (feat. Kasane Teto)</p>
+    </a>
+  </main>
+
+  <script>
+  const profile = document.querySelector('.profile');
+
+  // imagens possíveis
+  const avatars = [
+    "url('https://i.imgur.com/1FBKZ78.png')", // imagem da Miku
+    "url('https://i.imgur.com/DlND9HZ.png')", // imagem da Teto
+    "url('https://i.imgur.com/RBGP46j.png')"  // imagem da Neru
+  ];
+
+  // escolhe uma aleatória
+  window.addEventListener('load', () => {
+    const random = Math.floor(Math.random() * avatars.length);
+    profile.style.backgroundImage = avatars[random];
+    profile.style.backgroundSize = "cover";
+  });
+</script>
+
+  <!-- 🔎 Script da pesquisa -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const input  = document.getElementById('searchInput');
+    const btn    = document.getElementById('searchBtn');
+    const cards  = document.querySelectorAll('.thumb');
+
+    function applyFilter() {
+      const q = input.value.trim().toLowerCase();
+      cards.forEach(card => {
+        const title = card.querySelector('p').textContent.toLowerCase();
+        const keys  = (card.dataset.keywords || '').toLowerCase();
+        card.style.display = (!q || title.includes(q) || keys.includes(q)) ? '' : 'none';
+      });
+    }
+
+    input.addEventListener('input', applyFilter);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') applyFilter(); });
+    btn.addEventListener('click', applyFilter);
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
