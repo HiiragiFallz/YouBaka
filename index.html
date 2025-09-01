@@ -258,8 +258,40 @@ shuffled.forEach(v => {
 });
 </script>
 
+  <script>
+async function loadVideos() {
+  const response = await fetch("data/videos.csv");
+  const text = await response.text();
+
+  // Quebrar em linhas
+  const lines = text.split("\n").slice(1); // tira o cabeçalho
+
+  const grid = document.getElementById("videoGrid");
+
+  lines.forEach(line => {
+    if (!line.trim()) return; // pula linha vazia
+    const [title, keywords, thumbnail, url] = line.split(",");
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.className = "thumb";
+    a.dataset.keywords = keywords;
+
+    a.innerHTML = `
+      <img src="${thumbnail}" alt="${title}">
+      <p>${title}</p>
+    `;
+
+    grid.appendChild(a);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", loadVideos);
+</script>
+
 </body>
 </html>
+
 
 
 
